@@ -9,6 +9,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<AppDbContext>
     (opt => opt.UseInMemoryDatabase("InMem"));
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 //Scope
 builder.Services.AddScoped<IPlatformRepo,PlaformRepo>();
