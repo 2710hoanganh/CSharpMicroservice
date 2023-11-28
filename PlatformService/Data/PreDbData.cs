@@ -6,7 +6,8 @@ namespace PlatformService.Data
     {
         public static void PrePopulation(IApplicationBuilder applicationBuilder)
         {
-            using(var serviceScope = applicationBuilder.ApplicationServices.CreateScope()){
+            using(var serviceScope = applicationBuilder.ApplicationServices.CreateScope())
+            {
                 SeedData(serviceScope.ServiceProvider.GetService<AppDbContext>());
             }
         }
@@ -15,11 +16,11 @@ namespace PlatformService.Data
             {
                 Console.WriteLine("Seeding data!");
                 appDbContext.Platforms.AddRange(
-                    new Platform() {Name="Dotnet", Publisher="Microsoft", Cost="Free"},
-                    new Platform() {Name="SQLServer", Publisher="Microsoft", Cost="Free"},
-                    new Platform() {Name="MongoDb", Publisher="MongoDb", Cost="Free"},
-                    new Platform() {Name="Nodejs", Publisher="Node", Cost="Free"},
-                    new Platform() {Name="Nestjs", Publisher="Nest", Cost="Free"}
+                    new Platform() {Id=1,Name="Dotnet", Publisher="Microsoft", Cost="Free"},
+                    new Platform() {Id=2,Name="SQLServer", Publisher="Microsoft", Cost="Free"},
+                    new Platform() {Id=3,Name="MongoDb", Publisher="MongoDb", Cost="Free"},
+                    new Platform() {Id=4,Name="Nodejs", Publisher="Node", Cost="Free"},
+                    new Platform() {Id=5,Name="Nestjs", Publisher="Nest", Cost="Free"}
                 );
                 appDbContext.SaveChanges();
             }

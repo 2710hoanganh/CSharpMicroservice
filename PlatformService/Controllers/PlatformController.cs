@@ -6,8 +6,8 @@ using PlatformService.Models;
 
 namespace PlatformService.Controllers
 {
-    [Route("api/[controller]")]
     [ApiController]
+    [Route("[controller]")]
     public class PlatformController : ControllerBase
     {
         private readonly IPlatformRepo _platfromRepo ;
@@ -17,7 +17,7 @@ namespace PlatformService.Controllers
             _platfromRepo = platformRepo ;
             _mapper = mapper ;
         }
-        [HttpGet("{id}")]
+        [HttpGet("{id}",Name = "GetPlatformById")]
         public ActionResult<PlaformReadDto> GetPlatformById(int id)
         {
             try
@@ -34,13 +34,14 @@ namespace PlatformService.Controllers
             }
         }
         [HttpGet("list")]
-        public ActionResult<IEnumerable<Platform>> GetAllPlatform()
+        public ActionResult<List<Platform>> GetAllPlatform()
         {
             try
             {
-                IEnumerable<Platform> platforms = _platfromRepo.GetAllPlatforms();
-                if(platforms is not null){
-                    return Ok(_mapper.Map<PlaformReadDto>(platforms));
+                List<Platform> platforms = _platfromRepo.GetAllPlatforms();
+                if(platforms is not null)
+                {
+                    return Ok(_mapper.Map<List<PlaformReadDto>>(platforms));
                 }
                 return NotFound();
             }
@@ -55,8 +56,8 @@ namespace PlatformService.Controllers
                 Platform platform = _mapper.Map<Platform>(plaformCreateDto);
                 _platfromRepo.CreatePlafrom(platform);
                 _platfromRepo.SaveChange();
-                PlaformReadDto plaformReadDto = _mapper.Map<PlaformReadDto>(platform);
-                return Ok(plaformReadDto);
+                PlaformReadDto platformReadDto = _mapper.Map<PlaformReadDto>(platform);
+                return Ok(platformReadDto);
             }
             catch(Exception ex)
             {

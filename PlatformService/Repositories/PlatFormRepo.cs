@@ -27,7 +27,7 @@ namespace PlatformService.Data
             }
         }
 
-        public IEnumerable<Platform> GetAllPlatforms()
+        public List<Platform> GetAllPlatforms()
         {
             return _context.Platforms.ToList();
         }
